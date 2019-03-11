@@ -107,7 +107,8 @@ public class RouterManager {
      */
     public Router addRouter(String routerName, String url, String path) {
         Router router = new Router(routerName, url, path);
-        return mRouterMap.put(routerName, router);
+        mRouterMap.put(routerName, router);
+        return router;
     }
 
     /**
@@ -148,51 +149,60 @@ public class RouterManager {
         if (routerName == null || routerName.equals("")) throw new IllegalArgumentException("router name is required");
         Router router = getRouter(routerName);
         if (router != null) {
-            URI uri = URI.create(router.getUrl());
-            String scheme = uri.getScheme();
-            if (scheme.equals("activity") && !handlerMap.containsKey(scheme)) { // 未设置activity处理使用默认
-                String className = router.getPath();
-                if (uri.getQuery() != null && !uri.getQuery().isEmpty()) {
-                    if (bundle == null)
-                        bundle = new Bundle();
-                    // convert query
-                    Map<String, String> params = getQueryParams(uri.getQuery());
-                    for (String str : params.keySet()) {
-                        bundle.putString(str, params.get(str));
-                    }
-                }
-                try {
-                    Class activityClass = Class.forName(className);
-                    Intent intent = new Intent(mContext, activityClass);
-                    if (bundle != null) {
-                        intent.putExtras(bundle);
-                    }
-                    if (activity != null) {
-                        activity.startActivityForResult(intent, requestCode);
-                    } else {
-                        mContext.startActivity(intent);
-                    }
-                    // reset params
-                    resetParams();
-                    return true;
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                if (handlerMap != null && handlerMap.containsKey(scheme)) {
-                    CustomRouterHandler customRouterHandler = handlerMap.get(scheme);
-                    if (customRouterHandler != null) {
-                        Map<String, String> params = null;
-                        if (uri.getQuery() != null && !uri.getQuery().isEmpty()) {
-                            params = getQueryParams(uri.getQuery());
+            URI uri = null;
+            try {
+                uri = URI.create(router.getUrl());
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            }
+            if (uri != null && uri.getScheme() != null) {
+                String scheme = uri.getScheme();
+                if (scheme.equals("activity") && !handlerMap.containsKey(scheme)) { // 未设置activity处理使用默认
+                    String className = router.getPath();
+                    if (uri.getQuery() != null && !uri.getQuery().isEmpty()) {
+                        if (bundle == null)
+                            bundle = new Bundle();
+                        // convert query
+                        Map<String, String> params = getQueryParams(uri.getQuery());
+                        for (String str : params.keySet()) {
+                            bundle.putString(str, params.get(str));
                         }
-                        customRouterHandler.onRouterHandler(router, params);
+                    }
+                    try {
+                        Class activityClass = Class.forName(className);
+                        Intent intent = new Intent(mContext, activityClass);
+                        if (bundle != null) {
+                            intent.putExtras(bundle);
+                        }
+                        if (activity != null) {
+                            activity.startActivityForResult(intent, requestCode);
+                        } else {
+                            mContext.startActivity(intent);
+                        }
                         // reset params
                         resetParams();
                         return true;
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
                     }
+                } else {
+                    if (handlerMap != null && handlerMap.containsKey(scheme)) {
+                        CustomRouterHandler customRouterHandler = handlerMap.get(scheme);
+                        if (customRouterHandler != null) {
+                            Map<String, String> params = null;
+                            if (uri.getQuery() != null && !uri.getQuery().isEmpty()) {
+                                params = getQueryParams(uri.getQuery());
+                            }
+                            customRouterHandler.onRouterHandler(router, params);
+                            // reset params
+                            resetParams();
+                            return true;
+                        }
+                    }
+                    Log.d(this.getClass().getName(), "scheme not found name: " + scheme);
                 }
-                Log.d(this.getClass().getName(), "scheme not found name: " + scheme);
+            } else {
+                Log.d(this.getClass().getName(), "uri parse error url: " + router.getUrl());
             }
         } else {
             Log.d(this.getClass().getName(), "router not found name: " + routerName);

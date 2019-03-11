@@ -28,7 +28,7 @@ publish {
     userOrg = 'hwhong'//bintray.com 注册的用户名
     groupId = 'cn.hwhong.library.RouterLib' //jcenter上的路径
     artifactId = 'RouterLib'//项目名称
-    publishVersion = '1.0.0'//版本号
+    publishVersion = '1.0.1'//版本号
     website = 'https://github.com/hwh97'
 }
 
