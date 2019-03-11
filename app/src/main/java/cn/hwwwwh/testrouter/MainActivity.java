@@ -5,18 +5,17 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import java.net.URI;
+
 import java.util.Map;
 
 import cn.hwwwwh.testrouter.constants.MyRouter;
-import cn.hwwwwh.testrouter.router.RouterManager;
-import cn.hwwwwh.testrouter.router.bean.Router;
-import cn.hwwwwh.testrouter.router.handler.CustomRouterHandler;
+import cn.hwwwwh.routerlib.RouterManager;
+import cn.hwwwwh.routerlib.bean.Router;
+import cn.hwwwwh.routerlib.handler.CustomRouterHandler;
 
 public class MainActivity extends AppCompatActivity {
 

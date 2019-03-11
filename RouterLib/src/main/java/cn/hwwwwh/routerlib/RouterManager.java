@@ -1,4 +1,4 @@
-package cn.hwwwwh.testrouter.router;
+package cn.hwwwwh.routerlib;
 
 import android.app.Activity;
 import android.content.Context;
@@ -18,8 +18,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cn.hwwwwh.testrouter.router.bean.Router;
-import cn.hwwwwh.testrouter.router.handler.CustomRouterHandler;
+import cn.hwwwwh.routerlib.bean.Router;
+import cn.hwwwwh.routerlib.handler.CustomRouterHandler;
 
 public class RouterManager {
 

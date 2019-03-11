@@ -6,9 +6,9 @@ import android.net.Uri;
 
 import java.util.Map;
 
-import cn.hwwwwh.testrouter.router.RouterManager;
-import cn.hwwwwh.testrouter.router.bean.Router;
-import cn.hwwwwh.testrouter.router.handler.CustomRouterHandler;
+import cn.hwwwwh.routerlib.RouterManager;
+import cn.hwwwwh.routerlib.bean.Router;
+import cn.hwwwwh.routerlib.handler.CustomRouterHandler;
 
 public class MyApplication extends Application {
 

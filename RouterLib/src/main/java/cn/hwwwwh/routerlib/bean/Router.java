@@ -1,4 +1,4 @@
-package cn.hwwwwh.testrouter.router.bean;
+package cn.hwwwwh.routerlib.bean;
 
 public class Router {
     /**

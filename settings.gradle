@@ -1,1 +1,1 @@
-include ':app', ':routermodule1', ':routermodule2'
+include ':app', ':routermodule1', ':routermodule2', ':RouterLib'

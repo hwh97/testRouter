@@ -1,8 +1,8 @@
-package cn.hwwwwh.testrouter.router.handler;
+package cn.hwwwwh.routerlib.handler;
 
 import java.util.Map;
 
-import cn.hwwwwh.testrouter.router.bean.Router;
+import cn.hwwwwh.routerlib.bean.Router;
 
 public interface CustomRouterHandler {
 
