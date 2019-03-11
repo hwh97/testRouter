@@ -1,0 +1,12 @@
+[
+  {
+    "name": "test",
+    "url": "activity://Test1Activity?a=1&b=abc",
+    "path": "cn.hwwwwh.routermodule1.Test1Activity"
+  },
+  {
+    "name": "httpTest",
+    "url": "http://www.baidu.com",
+    "path": ""
+  }
+]

@@ -1,0 +1,12 @@
+[
+  {
+    "name": "test",
+    "url": "activity://Test2Activity?a=2&b=def",
+    "path": "cn.hwwwwh.routermodule2.Test2Activity"
+  },
+  {
+    "name": "httpTest",
+    "url": "http://www.hwwwwh.cn",
+    "path": ""
+  }
+]
